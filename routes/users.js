@@ -38,6 +38,38 @@ userRouter.route('/signup')
         });
     });
 
+userRouter.route('/login')
+
+    .post(function (req, res, next) {
+        passport.authenticate('local', function (err, user, info) {
+            if (err) {
+                return res.status(500).send(err);
+            }
+
+            if (info) {
+                return res.status(401).send(info);
+            }
+
+            if(!user) {
+                return res.status(401).send(info);
+            }
+
+            req.logIn(user, function (err) {
+                if (err){
+                    return res.status(500).send(err);
+                }
+            });
+            var token = Verify.getToken({"username": user.username, "_id":user._id, "role": user.role});
+
+            res.status(200).send({
+                message: 'Login successful',
+                success: true,
+                user: user,
+                token: token
+            });
+        })(req, res, next);
+    });
+
 
 
 

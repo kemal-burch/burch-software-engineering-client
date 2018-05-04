@@ -27,45 +27,7 @@ tabtalent.config(function ($stateProvider, $urlRouterProvider, $locationProvider
             }
         })
 
-        .state('app.signin',{
-            url:'signin',
-            views: {
-                'header': {
-                },
-                'content@': {
-                    templateUrl: '../template/login/login.component.html',
-                    controller: 'LoginController'
-                }
-            }
-        })
-
-        .state('app.profile',{
-            url:'profile',
-            views: {
-                'header@': {
-                    templateUrl: '../template/header/header.component.html',
-                    controller: 'HeaderController'
-                },
-                'content@': {
-                    templateUrl: '../template/profile/profile.component.html',
-                    controller: 'ProfileController'
-                }
-            }
-        })
-
-        .state('app.company',{
-            url:'company',
-            views: {
-                'header@': {
-                    templateUrl: '../template/header/header.component.html',
-                    controller: 'HeaderController'
-                },
-                'content@': {
-                    templateUrl: '../template/company/company.component.html',
-                    controller: 'CompanyController'
-                }
-            }
-        });
+       
 
     $locationProvider.html5Mode({
         enabled: true,
