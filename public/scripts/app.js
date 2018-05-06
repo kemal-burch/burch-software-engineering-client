@@ -27,6 +27,18 @@ tabtalent.config(function ($stateProvider, $urlRouterProvider, $locationProvider
             }
         })
 
+        .state('app.signin',{
+            url:'signin',
+            views: {
+                'header': {
+                },
+                'content@': {
+                    templateUrl: '../template/login/login.component.html',
+                    controller: 'LoginController'
+                }
+            }
+        })
+
        
 
     $locationProvider.html5Mode({

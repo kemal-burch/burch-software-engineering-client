@@ -46,14 +46,7 @@ userRouter.route('/login')
                 return res.status(500).send(err);
             }
 
-            if (info) {
-                return res.status(401).send(info);
-            }
-
-            if(!user) {
-                return res.status(401).send(info);
-            }
-
+           
             req.logIn(user, function (err) {
                 if (err){
                     return res.status(500).send(err);
