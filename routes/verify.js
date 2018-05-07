@@ -16,7 +16,7 @@ exports.verifyUser = function (req, res, next) {
             if (err) {
                 var error = new Error('You are not authenticated!');
                 error.status = 401;
-                return next();
+                return next(error);
             } else {
                 req.decoded = decoded;
                 next();
