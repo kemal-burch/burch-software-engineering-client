@@ -70,7 +70,17 @@ userRouter.route('/login')
         })(req, res, next);
     });
 
+userRouter.route('/update')
 
+    .put(function (req, res, next) {
+        console.log(req.body);
+        User.findOneAndUpdate({_id: req.body._id}, req.body, {new : true}, function (err, user) {
+            if (err) {
+                return res.status(500).send(err);
+            }
+            res.status(200).send(user);
+        })
+    });
 
 
 module.exports = userRouter;

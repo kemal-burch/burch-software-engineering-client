@@ -4,6 +4,7 @@ tabtalent.controller('SignupController', ['$http', '$scope', '$stateParams', '$s
     $scope.registerUser = function () {
         $http.post('http://localhost/tab_api/index.php/users/signup', $scope.cred).then(function (res) {
             $rootScope.user = (res.data || {}).data;
+            $rootScope.user.experiences = [];
            
             $state.go('app.register');
             localStorage.setItem('TabTalentUser', JSON.stringify($rootScope.user));

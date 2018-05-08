@@ -10,23 +10,17 @@ tabtalent.controller('RegisterController', ['$http', '$scope', '$stateParams', '
             .change(dateChanged)
             .on('changeDate', dateChanged);
     });
-    
-    $scope.addExperience = function () {
-        $rootScope.user.experiences.push({});
-    };
 
+      $(document).on("focus", ".datepickeredu", function(){
+        $(this).daterangepicker({
+            singleDatePicker: true,
+            showDropdowns: true
+        })
+            .change(dateEduChanged)
+            .on('changeDate', dateEduChanged);
+    });
     
-    if($rootScope.user.experiences && $rootScope.user.experiences.length == 0){
-        $rootScope.user.experiences.push({});
-    } else {
-        setTimeout(function () {
-            $rootScope.user.experiences.forEach(function (toMatch, index) {
-                var id = 'autoname'+index;
-                $scope.$broadcast('angucomplete-alt:changeInput', id, toMatch.companyName);
-                $scope.$apply()
-            });
-        }, 1000)
-    }
+   
     
     $scope.postDetails = function () {
 
