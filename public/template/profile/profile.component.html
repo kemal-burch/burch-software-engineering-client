@@ -7,7 +7,7 @@
                 <div class="profile-details clearfix">
                     <img src="../assets/images/profile_img.png" class="profile-logo">
                     <div class="profile-info">
-                        <h2 class="profile-title">{{$root.user.firstName}} </h2>
+                        <h2 class="profile-title">{{$root.user.firstName}} {{$root.user.lastName}}</h2>
                         <div class="profile-contact-wrapper">
                             <p class="contact-item">
                                 <span class="glyphicon glyphicon-envelope contact-icon"></span> {{$root.user.username}}</p>
@@ -32,11 +32,42 @@
 
             <br>
 
+            <div class="experience-card">
+                <div class="experience-header">
+                    <h3 class="profile-experience-title">Experience</h3>
+                    <button type="button" data-toggle="modal" data-target="#myModal" style="height:30px; padding: 0; border: 0"><img ng-click="openExperiencePopup()" class="plus-image" style="margin-top: 0" src="../assets/images/plus_img.png"></button>
+
+                </div>
+                <div ng-repeat="experience in $root.user.experiences track by $index">
+                    <div class="the-experience">
+                        <div class="exp-header">
+                            <div class="exp-info">
+                                <h3 class="exp-title">{{experience.jobTitle}}</h3>
+                                <p class="exp-subtitle" ng-if="!experience.linkedTo">{{experience.companyName}}</p>
+                                <a ng-if="experience.linkedTo" ui-sref="app.company">{{experience.companyName}}</a>
+                                <p class="exp-duration">({{experience.dateFrom}} - {{experience.dateTo}})</p>
+                            </div>
+
+                            <div class="exp-buttons">
+                                <button type="button" class="btn btn-primary btn-outline btn-endo">Request Endorsement</button>
+                                <button type="button" class="btn btn-primary btn-outline btn-endo">Endorsements</button>
+                                <span ng-click="removeExperience($index)" class="glyphicon glyphicon-remove delete-exp-icon"></span>
+                            </div>
+
+
+                        </div>
+                        <div class="exp-description">{{experience.desc}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="btn-showmore-wrapper">
+                    <button type="button" class="btn btn-primary btn-outline">Show More</button>
+                </div>
+
+            </div>
+
            
-
-          
-         
-
             <br>
             <br>
             <br>
@@ -54,7 +85,7 @@
                 <div class="center-block">
                     <img src="../assets/images/profile_img.png" class="profile-logo-xs center-block">
                     <div>
-                        <h2 class="profile-title text-center">{{$root.user.firstName}} </h2>
+                        <h2 class="profile-title text-center">{{$root.user.firstName}} {{$root.user.lastName}}</h2>
                         <div class="profile-contact-wrapper">
                             <p class="contact-item-xs">
                                 <span class="glyphicon glyphicon-envelope contact-icon"></span> {{$root.user.username}}</p>
@@ -78,7 +109,40 @@
 
             <br>
 
-           
+            <div class="experience-card-xs">
+                <div class="experience-header">
+                    <h3 class="profile-experience-title">Experience</h3>
+                    <button type="button" data-toggle="modal" data-target="#myModal" style="height:30px; padding: 0; border: 0"><img ng-click="openExperiencePopup()" class="plus-image" style="margin-top: 0" src="../assets/images/plus_img.png"></button>
+
+                </div>
+                <div ng-repeat="experience in $root.user.experiences track by $index">
+                    <div class="the-experience">
+                        <div class="exp-header">
+                            <div class="exp-info">
+                                <h3 class="exp-title">{{experience.jobTitle}}</h3>
+                                <p class="exp-subtitle" ng-if="!experience.linkedTo">{{experience.companyName}}</p>
+                                <a ng-if="experience.linkedTo" ui-sref="app.company">{{experience.companyName}}</a>
+                                <p class="exp-duration">({{experience.dateFrom}} - {{experience.dateTo}})</p>
+                            </div>
+                        </div>
+                        <div class="exp-description-xs">{{experience.desc}}
+                        </div>
+                        <div class="exp-buttons">
+                            <button type="button" class="btn btn-primary btn-outline btn-endo">Request Endorsement</button>
+                            <button type="button" class="btn btn-primary btn-outline btn-endo">Endorsements</button>
+                            <span ng-click="removeExperience($index)" class="glyphicon glyphicon-remove delete-exp-icon"></span>
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+
+                <div class="btn-showmore-wrapper">
+                    <button type="button" class="btn btn-primary btn-outline">Show More</button>
+                </div>
+
+            </div>
+
+          
 
             <br>
             <br>
@@ -89,6 +153,68 @@
         </div>
     </div>
     
+</div>
+
+
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-body">
+                <h3 class="profile-experience-title" style="margin-top: 20px">Add Work Experience</h3>
+
+                <div style="margin-bottom:10px;">
+                    <br>
+                    <div class="form-group">
+                        <label for="job">Job Title</label>
+                        <input type="text" class="form-control" ng-model='experience.jobTitle' name="job">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="company">Company</label>
+                        <angucomplete-alt id="name2"
+                                          pause="5"
+                                          selected-object="selectedCompany"
+                                          local-data="companies"
+                                          search-fields="name"
+                                          title-field="name"
+                                          minlength="1"
+                                          input-class="form-control form-control-small"
+                                          override-suggestions="true"
+                                          text-no-results="No companies found"/>
+                        <!--<input type="text" class="form-control" ng-model='experience.companyName' name="company">-->
+                    </div>
+
+                    <div class="form-group">
+                        <label for="location">Location</label>
+                        <input type="text" class="form-control" ng-model='experience.location' name="location">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="desc">Description</label>
+                        <textarea type="text" class="form-control" ng-model='experience.desc' name="desc"></textarea>
+                    </div>
+
+                    <div class="datepickers-wrapper">
+                        <div class="form-group">
+                            <label for="datefrom">From</label><br>
+                            <input type="text" class="datepicker datepickerexp" ng-model='experience.dateFrom' name="datefrom"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="dateto">To</label><br>
+                            <input type="text" class="datepicker datepickerexp" ng-model='experience.dateTo' name="dateto"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="addExperience()">Add</button>
+            </div>
+        </div>
+
+    </div>
 </div>
 
 

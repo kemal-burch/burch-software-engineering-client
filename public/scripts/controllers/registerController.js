@@ -20,7 +20,22 @@ tabtalent.controller('RegisterController', ['$http', '$scope', '$stateParams', '
             .on('changeDate', dateEduChanged);
     });
     
-   
+    $scope.addExperience = function () {
+        $rootScope.user.experiences.push({});
+    };
+
+    
+    if($rootScope.user.experiences && $rootScope.user.experiences.length == 0){
+        $rootScope.user.experiences.push({});
+    } else {
+        setTimeout(function () {
+            $rootScope.user.experiences.forEach(function (toMatch, index) {
+                var id = 'autoname'+index;
+                $scope.$broadcast('angucomplete-alt:changeInput', id, toMatch.companyName);
+                $scope.$apply()
+            });
+        }, 1000)
+    }
     
     $scope.postDetails = function () {
 
