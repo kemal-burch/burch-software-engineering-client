@@ -65,6 +65,22 @@ tabtalent.controller('ProfileController', ['$http', '$scope', '$stateParams', '$
         })
     };
     
+    $scope.addSkill = function () {
+        $scope.skill.user_id = $rootScope.user.id;
+        $http.post('http://localhost/tab_api/index.php/users/addSkill', $scope.skill).then(function (res) {
+            $scope.skill = (res.data || {}).data;
+            $rootScope.user.skills.push($scope.skill);
+            localStorage.setItem('TabTalentUser', JSON.stringify($rootScope.user));
+            $scope.skill = {};
+        })
+    };
+
    
+
+    $scope.getallCompanyData = function () {
+        $http.get('http://localhost/tab_api/index.php/company/getall').then(function (response) {
+            $scope.companies = (response.data || {}).data;
+        })
+    };
     
 }]);
