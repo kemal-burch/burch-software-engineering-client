@@ -33,7 +33,15 @@ tabtalent.controller('ProfileController', ['$http', '$scope', '$stateParams', '$
         }
     }
 
-   
+    function dateEduChanged(e) {
+        var name = e.target.name;
+
+        if(name == 'datefromedu'){
+            $scope.education.dateFrom = e.target.value;
+        } else {
+            $scope.education.dateTo = e.target.value;
+        }
+    }
     
     $scope.addExperience = function () {
         if($scope.selectedCompany){

@@ -6,6 +6,7 @@ tabtalent.controller('SignupController', ['$http', '$scope', '$stateParams', '$s
             $rootScope.user = (res.data || {}).data;
             $rootScope.user.experiences = [];
             $rootScope.user.skills = [];
+            $rootScope.user.educations = [];
             $state.go('app.register');
             localStorage.setItem('TabTalentUser', JSON.stringify($rootScope.user));
         }, function (error) { 

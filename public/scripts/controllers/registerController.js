@@ -10,15 +10,6 @@ tabtalent.controller('RegisterController', ['$http', '$scope', '$stateParams', '
             .change(dateChanged)
             .on('changeDate', dateChanged);
     });
-
-      $(document).on("focus", ".datepickeredu", function(){
-        $(this).daterangepicker({
-            singleDatePicker: true,
-            showDropdowns: true
-        })
-            .change(dateEduChanged)
-            .on('changeDate', dateEduChanged);
-    });
     
     $scope.addExperience = function () {
         $rootScope.user.experiences.push({});
